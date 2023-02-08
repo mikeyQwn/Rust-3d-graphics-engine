@@ -10,3 +10,13 @@ impl Vec3d {
         Self { x, y, z }
     }
 }
+
+impl Default for Vec3d {
+    fn default() -> Self {
+        Self {
+            x: 0.0,
+            y: 0.0,
+            z: 0.0,
+        }
+    }
+}
