@@ -1,8 +1,8 @@
 #[derive(PartialEq, Debug)]
 pub struct Vec3d {
-    x: f64,
-    y: f64,
-    z: f64,
+    pub x: f64,
+    pub y: f64,
+    pub z: f64,
 }
 
 impl Vec3d {

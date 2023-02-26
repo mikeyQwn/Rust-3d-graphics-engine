@@ -1,6 +1,6 @@
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Default)]
 pub struct Matrix4x4 {
-    matrix: [[f64; 4]; 4],
+    pub matrix: [[f64; 4]; 4],
 }
 
 impl Matrix4x4 {
