@@ -34,16 +34,10 @@ impl Mesh {
     }
 
     pub fn translate(&mut self, dx: f64, dy: f64, dz: f64) {
-        for mut triangle in self.triangles.iter_mut() {
-            triangle.a.x += dx;
-            triangle.a.y += dy;
-            triangle.a.z += dz;
-            triangle.b.x += dx;
-            triangle.b.y += dy;
-            triangle.b.z += dz;
-            triangle.c.x += dx;
-            triangle.c.y += dy;
-            triangle.c.z += dz;
+        for triangle in self.triangles.iter_mut() {
+            triangle.a.translate(dx, dy, dz);
+            triangle.b.translate(dx, dy, dz);
+            triangle.c.translate(dx, dy, dz);
         }
     }
 }
