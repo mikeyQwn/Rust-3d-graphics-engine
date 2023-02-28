@@ -16,6 +16,22 @@ impl Vec3d {
         self.z += dz;
     }
 
+    pub fn get_fibonacci_sphere_points(number_of_points: usize) -> Vec<Self> {
+        let mut points: Vec<Vec3d> = Vec::with_capacity(number_of_points);
+        let phi = 3.1415 * (3.0 - 5.0_f64.sqrt());
+        for i in 0..number_of_points {
+            let y = 1.0 - (i as f64 / (number_of_points as f64 - 1.0)) * 2.0;
+            let radius = (1.0 - y * y).sqrt();
+
+            let theta = phi * i as f64;
+
+            let x = theta.cos() * radius;
+            let z = theta.sin() * radius;
+            points.push(Vec3d::new(x, y, z));
+        }
+        points
+    }
+
     pub fn get_teapot_points() -> Vec<Self> {
         vec![
             Vec3d::new(7.00000, 12.00000, 0.00000),
