@@ -74,6 +74,10 @@ impl WindowManager {
             ));
     }
 
+    pub fn clear_window(&mut self) {
+        self.canvas.clear()
+    }
+
     pub fn fill_window(&mut self, offset: f64) {
         let (width, _) = self.get_window_size();
         let true_offset = ((offset * 10.0) % (width * 4) as f64) as u32;
