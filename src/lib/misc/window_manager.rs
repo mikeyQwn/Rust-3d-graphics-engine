@@ -34,8 +34,12 @@ impl WindowManager {
         };
     }
 
+    pub fn get_window_size(&self) -> (u32, u32) {
+        self.canvas.output_size().expect("Could not get a size")
+    }
+
     pub fn fill_window(&mut self, offset: f64) {
-        let (width, height) = self.canvas.output_size().expect("Could not get a size");
+        let (width, _) = self.get_window_size();
         let true_offset = ((offset * 10.0) % (width * 4) as f64) as u32;
 
         for x in 0..width {
@@ -51,7 +55,7 @@ impl WindowManager {
     }
 
     pub fn fill_screen_saver_data(&mut self) {
-        let (width, _) = self.canvas.output_size().expect("Could not get a size");
+        let (width, _) = self.get_window_size();
         let f64_width = width as f64;
         for x in 0..(width * 5) {
             let x_normalized = x as f64 / f64_width % 1.0;
