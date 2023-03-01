@@ -1,5 +1,13 @@
 extern crate sdl2;
 
+pub enum WMColor {
+    BLACK,
+    WHITE,
+    RED,
+    GREEN,
+    BLUE,
+}
+
 struct ScreenSaverData {
     data: Vec<sdl2::pixels::Color>,
 }
@@ -42,6 +50,16 @@ impl WindowManager {
         self.canvas
             .fill_rect(sdl2::rect::Rect::new(x, y, width, width))
             .expect(&format!("Could not draw a point at: ({}, {})", x, y));
+    }
+
+    pub fn change_color(&mut self, color: WMColor) {
+        self.canvas.set_draw_color(match color {
+            WMColor::BLACK => sdl2::pixels::Color::BLACK,
+            WMColor::WHITE => sdl2::pixels::Color::WHITE,
+            WMColor::RED => sdl2::pixels::Color::RED,
+            WMColor::GREEN => sdl2::pixels::Color::GREEN,
+            WMColor::BLUE => sdl2::pixels::Color::BLUE,
+        });
     }
 
     pub fn draw_line(&mut self, x1: i32, y1: i32, x2: i32, y2: i32) {
