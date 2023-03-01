@@ -38,6 +38,24 @@ impl WindowManager {
         self.canvas.output_size().expect("Could not get a size")
     }
 
+    pub fn fill_point(&mut self, x: i32, y: i32, width: u32) {
+        self.canvas
+            .fill_rect(sdl2::rect::Rect::new(x, y, width, width))
+            .expect(&format!("Could not draw a point at: ({}, {})", x, y));
+    }
+
+    pub fn draw_line(&mut self, x1: i32, y1: i32, x2: i32, y2: i32) {
+        self.canvas
+            .draw_line(
+                sdl2::rect::Point::new(x1, y1),
+                sdl2::rect::Point::new(x2, y2),
+            )
+            .expect(&format!(
+                "Could not draw a line: ({}, {}, {}, {})",
+                x1, y1, x2, y2
+            ));
+    }
+
     pub fn fill_window(&mut self, offset: f64) {
         let (width, _) = self.get_window_size();
         let true_offset = ((offset * 10.0) % (width * 4) as f64) as u32;
