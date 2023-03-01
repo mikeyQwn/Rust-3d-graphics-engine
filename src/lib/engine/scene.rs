@@ -1,3 +1,4 @@
+use crate::lib::math::projector::Projector;
 use crate::lib::math::vec3d::Vec3d;
 use crate::lib::misc::window_manager::WindowManager;
 
@@ -52,6 +53,6 @@ impl Default for Camera {
     }
 }
 
-trait Renderer {
-    fn render(&self) -> ();
+pub trait Renderer {
+    fn render(&self, projector: &mut Projector, window_manger: &mut WindowManager) -> ();
 }
