@@ -5,7 +5,7 @@ use crate::lib::math::triangle3d::Triangle3d;
 use crate::lib::misc::window_manager::WindowManager;
 
 pub struct Cube {
-    mesh: Mesh,
+    pub mesh: Mesh,
 }
 
 impl Cube {
@@ -43,13 +43,13 @@ impl Renderer for Cube {
             let c_projected = projector.project(&triangle.c);
 
             let a_x_normalized = (a_projected.x + 1.0) * 0.5;
-            let a_y_normalized = (a_projected.y + 1.0) * 0.5;
+            let a_y_normalized = 1.0 - (a_projected.y + 1.0) * 0.5;
 
             let b_x_normalized = (b_projected.x + 1.0) * 0.5;
-            let b_y_normalized = (b_projected.y + 1.0) * 0.5;
+            let b_y_normalized = 1.0 - (b_projected.y + 1.0) * 0.5;
 
             let c_x_normalized = (c_projected.x + 1.0) * 0.5;
-            let c_y_normalized = (c_projected.y + 1.0) * 0.5;
+            let c_y_normalized = 1.0 - (c_projected.y + 1.0) * 0.5;
 
             let (width, height) = window_manager.get_window_size();
             let width_f64 = width as f64;
