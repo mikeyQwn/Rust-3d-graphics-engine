@@ -8,6 +8,11 @@ pub struct Scene {
     window_manger: WindowManager,
 }
 
+pub enum SceneObject {
+    CUBE,
+    SPHERE,
+}
+
 impl Scene {
     pub fn new() -> Self {
         Self {
@@ -16,13 +21,34 @@ impl Scene {
             window_manger: WindowManager::new(),
         }
     }
+
+    pub fn spawn_object(&mut self, object: SceneObject) {
+        self.objects.push(match object {
+            SceneObject::CUBE => Box::new(crate::lib::engine::objects::cube::Cube::new(
+                10.0, 10.0, 10.0,
+            )),
+            SceneObject::SPHERE => Box::new(crate::lib::engine::objects::sphere::Sphere::new(100)),
+        })
+    }
+
     pub fn run(mut self) -> i32 {
-        self.window_manger.fill_screen_saver_data();
         let start_time = std::time::Instant::now();
         let mut is_running = true;
+        let mut projector = crate::lib::math::projector::Projector::default();
+        let mut prev_frame = std::time::Instant::now();
         'running: loop {
+            let elapsed = std::time::Instant::now()
+                .duration_since(prev_frame)
+                .as_nanos();
+            prev_frame = std::time::Instant::now();
             self.window_manger
-                .fill_window(start_time.elapsed().as_millis() as f64 / 25.0);
+                .change_color(crate::lib::misc::window_manager::WMColor::BLACK);
+            self.window_manger.clear_window();
+            self.window_manger
+                .change_color(crate::lib::misc::window_manager::WMColor::WHITE);
+            self.objects
+                .iter_mut()
+                .for_each(|object| object.render(&mut projector, &mut self.window_manger));
             self.window_manger.update_window(&mut is_running);
             if !is_running {
                 break 'running;

@@ -1,9 +1,11 @@
-use lib::engine::scene::Scene;
+use lib::engine::scene::{Scene, SceneObject};
 
 mod lib;
 
 fn main() {
-    let scene = Scene::new();
+    let mut scene = Scene::new();
+    scene.spawn_object(SceneObject::SPHERE);
+    scene.spawn_object(SceneObject::CUBE);
     scene.run();
 }
 
