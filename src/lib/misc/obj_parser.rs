@@ -19,7 +19,8 @@ impl ObjParser {
         let mut geometric_vertices = Vec::new();
         lines.for_each(|line| match line.chars().nth(0) {
             Some('v') => {
-                let vec = Self::parse_numbers(&line.to_string());
+                let parsed = Self::parse_numbers(&line.to_string());
+                let vec = Vec3d::from_vec_of_points(&parsed);
                 geometric_vertices.push(vec);
             }
             _ => {}
@@ -31,7 +32,7 @@ impl ObjParser {
         self.geometric_vertices.clone()
     }
 
-    fn parse_numbers(string: &String) -> Vec3d {
+    fn parse_numbers(string: &String) -> Vec<f64> {
         let mut numbers: Vec<f64> = Vec::new();
         let splitted = string.split(" ");
         for item in splitted {
@@ -40,15 +41,6 @@ impl ObjParser {
                 _ => {}
             }
         }
-        let mut result = Vec3d::default();
-        for (i, item) in numbers.iter().enumerate() {
-            match i {
-                0 => result.x = *item,
-                1 => result.y = *item,
-                2 => result.z = *item,
-                _ => {}
-            }
-        }
-        result
+        numbers
     }
 }

@@ -10,6 +10,19 @@ impl Vec3d {
         Self { x, y, z }
     }
 
+    pub fn from_vec_of_points(points_vec: &Vec<f64>) -> Self {
+        let mut result = Vec3d::default();
+        for (i, item) in points_vec.iter().enumerate() {
+            match i {
+                0 => result.x = *item,
+                1 => result.y = *item,
+                2 => result.z = *item,
+                _ => {}
+            }
+        }
+        result
+    }
+
     pub fn translate(&mut self, dx: f64, dy: f64, dz: f64) {
         self.x += dx;
         self.y += dy;
