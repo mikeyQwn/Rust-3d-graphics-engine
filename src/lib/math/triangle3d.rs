@@ -1,6 +1,6 @@
 use super::vec3d::Vec3d;
 
-#[derive(PartialEq, Debug)]
+#[derive(PartialEq, Debug, Default)]
 pub struct Triangle3d {
     pub a: Vec3d,
     pub b: Vec3d,
