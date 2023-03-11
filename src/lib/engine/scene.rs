@@ -11,6 +11,7 @@ pub struct Scene {
 pub enum SceneObject {
     CUBE,
     SPHERE,
+    TEAPOT,
 }
 
 impl Scene {
@@ -28,6 +29,7 @@ impl Scene {
                 10.0, 10.0, 10.0,
             )),
             SceneObject::SPHERE => Box::new(crate::lib::engine::objects::sphere::Sphere::new(100)),
+            SceneObject::TEAPOT => Box::new(crate::lib::engine::objects::teapot::Teapot::new()),
         })
     }
 

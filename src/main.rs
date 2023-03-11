@@ -6,6 +6,8 @@ fn main() {
     let mut scene = Scene::new();
     scene.spawn_object(SceneObject::SPHERE);
     scene.spawn_object(SceneObject::CUBE);
+    scene.spawn_object(SceneObject::TEAPOT);
+
     scene.run();
 }
 
