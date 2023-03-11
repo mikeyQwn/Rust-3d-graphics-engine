@@ -1,3 +1,4 @@
+use crate::lib::engine::objects;
 use crate::lib::math::projector::Projector;
 use crate::lib::math::vec3d::Vec3d;
 use crate::lib::misc::window_manager::WindowManager;
@@ -25,11 +26,9 @@ impl Scene {
 
     pub fn spawn_object(&mut self, object: SceneObject) {
         self.objects.push(match object {
-            SceneObject::CUBE => Box::new(crate::lib::engine::objects::cube::Cube::new(
-                10.0, 10.0, 10.0,
-            )),
-            SceneObject::SPHERE => Box::new(crate::lib::engine::objects::sphere::Sphere::new(100)),
-            SceneObject::TEAPOT => Box::new(crate::lib::engine::objects::teapot::Teapot::new()),
+            SceneObject::CUBE => Box::new(objects::cube::Cube::new(10.0, 10.0, 10.0)),
+            SceneObject::SPHERE => Box::new(objects::sphere::Sphere::new(100)),
+            SceneObject::TEAPOT => Box::new(objects::teapot::Teapot::new()),
         })
     }
 
