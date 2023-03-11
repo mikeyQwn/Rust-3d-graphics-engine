@@ -27,8 +27,8 @@ impl ObjParser {
         return Ok(ObjParser { geometric_vertices });
     }
 
-    pub fn geometric_vertices(&self) -> &Vec<Vec3d> {
-        &self.geometric_vertices
+    pub fn geometric_vertices(&self) -> Vec<Vec3d> {
+        self.geometric_vertices.clone()
     }
 
     fn parse_numbers(string: &String) -> Vec3d {
