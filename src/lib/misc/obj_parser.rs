@@ -4,6 +4,7 @@ use std::fs;
 #[derive(Default)]
 pub struct ObjParser {
     geometric_vertices: Vec<Vec3d>,
+    faces: Vec<Vec3d>,
 }
 
 impl ObjParser {
@@ -17,15 +18,24 @@ impl ObjParser {
 
         let lines = res.split('\n');
         let mut geometric_vertices = Vec::new();
+        let mut faces = Vec::new();
         lines.for_each(|line| match line.chars().nth(0) {
             Some('v') => {
                 let parsed = Self::parse_numbers(&line.to_string());
                 let vec = Vec3d::from_vec_of_points(&parsed);
                 geometric_vertices.push(vec);
             }
+            Some('f') => {
+                let parsed = Self::parse_numbers(&line.to_string());
+                let vec = Vec3d::from_vec_of_points(&parsed);
+                faces.push(vec)
+            }
             _ => {}
         });
-        return Ok(ObjParser { geometric_vertices });
+        return Ok(ObjParser {
+            geometric_vertices,
+            faces,
+        });
     }
 
     pub fn geometric_vertices(&self) -> Vec<Vec3d> {
