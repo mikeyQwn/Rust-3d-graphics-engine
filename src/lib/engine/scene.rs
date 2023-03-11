@@ -3,6 +3,7 @@ use crate::lib::math::projector::Projector;
 use crate::lib::math::vec3d::Vec3d;
 use crate::lib::misc::window_manager::WindowManager;
 
+#[allow(unused)]
 pub struct Scene {
     camera: Camera,
     objects: Vec<Box<dyn Renderer>>,
@@ -10,9 +11,9 @@ pub struct Scene {
 }
 
 pub enum SceneObject {
-    CUBE,
-    SPHERE,
-    TEAPOT,
+    Cube,
+    Sphere,
+    Teapot,
 }
 
 impl Scene {
@@ -26,27 +27,27 @@ impl Scene {
 
     pub fn spawn_object(&mut self, object: SceneObject) {
         self.objects.push(match object {
-            SceneObject::CUBE => Box::new(objects::cube::Cube::new(10.0, 10.0, 10.0)),
-            SceneObject::SPHERE => Box::new(objects::sphere::Sphere::new(100)),
-            SceneObject::TEAPOT => Box::new(objects::teapot::Teapot::new()),
+            SceneObject::Cube => Box::new(objects::cube::Cube::new(10.0, 10.0, 10.0)),
+            SceneObject::Sphere => Box::new(objects::sphere::Sphere::new(100)),
+            SceneObject::Teapot => Box::new(objects::teapot::Teapot::new()),
         })
     }
 
     pub fn run(mut self) -> i32 {
-        let start_time = std::time::Instant::now();
+        let _start_time = std::time::Instant::now();
         let mut is_running = true;
         let mut projector = crate::lib::math::projector::Projector::default();
         let mut prev_frame = std::time::Instant::now();
         'running: loop {
-            let elapsed = std::time::Instant::now()
+            let _elapsed = std::time::Instant::now()
                 .duration_since(prev_frame)
                 .as_nanos();
             prev_frame = std::time::Instant::now();
             self.window_manger
-                .change_color(crate::lib::misc::window_manager::WMColor::BLACK);
+                .change_color(crate::lib::misc::window_manager::WMColor::Black);
             self.window_manger.clear_window();
             self.window_manger
-                .change_color(crate::lib::misc::window_manager::WMColor::WHITE);
+                .change_color(crate::lib::misc::window_manager::WMColor::White);
             self.objects
                 .iter_mut()
                 .for_each(|object| object.render(&mut projector, &mut self.window_manger));
@@ -56,32 +57,26 @@ impl Scene {
             }
         }
 
-        return 0;
+        0
     }
 }
 
+#[derive(Default)]
+#[allow(unused)]
 struct Camera {
     position: Vec3d,
     rotation: Vec3d,
 }
 
+#[allow(unused)]
 impl Camera {
     pub fn new(position: Vec3d, rotation: Vec3d) -> Self {
-        return Self { position, rotation };
-    }
-}
-
-impl Default for Camera {
-    fn default() -> Self {
-        return Self {
-            position: Vec3d::default(),
-            rotation: Vec3d::default(),
-        };
+        Self { position, rotation }
     }
 }
 
 pub trait Renderer {
-    fn render(&self, projector: &mut Projector, window_manger: &mut WindowManager) -> ();
+    fn render(&self, projector: &mut Projector, window_manger: &mut WindowManager);
 }
 
 macro_rules! impl_render_for_mesh {

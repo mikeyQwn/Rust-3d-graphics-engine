@@ -5,12 +5,13 @@ pub struct Vec3d {
     pub z: f64,
 }
 
+#[allow(unused)]
 impl Vec3d {
     pub fn new(x: f64, y: f64, z: f64) -> Self {
         Self { x, y, z }
     }
 
-    pub fn from_vec_of_points(points_vec: &Vec<f64>) -> Self {
+    pub fn from_vec_of_points(points_vec: &[f64]) -> Self {
         let mut result = Vec3d::default();
         for (i, item) in points_vec.iter().enumerate() {
             match i {

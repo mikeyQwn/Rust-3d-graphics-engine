@@ -4,9 +4,9 @@ mod lib;
 
 fn main() {
     let mut scene = Scene::new();
-    scene.spawn_object(SceneObject::SPHERE);
-    scene.spawn_object(SceneObject::CUBE);
-    scene.spawn_object(SceneObject::TEAPOT);
+    scene.spawn_object(SceneObject::Sphere);
+    scene.spawn_object(SceneObject::Cube);
+    scene.spawn_object(SceneObject::Teapot);
 
     scene.run();
 }

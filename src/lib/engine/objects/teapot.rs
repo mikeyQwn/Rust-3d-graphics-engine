@@ -12,7 +12,7 @@ pub struct Teapot {
 
 impl Teapot {
     pub fn new() -> Self {
-        let parsed = ObjParser::parse(&"assets/teapot.obj".to_string());
+        let parsed = ObjParser::parse("assets/teapot.obj");
         if let Err(error) = parsed {
             panic!(
                 "Could not find assets/teapot.obj due to the following error: {}",

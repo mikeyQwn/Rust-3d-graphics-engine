@@ -4,6 +4,7 @@ pub struct Vec2d {
     y: f64,
 }
 
+#[allow(unused)]
 impl Vec2d {
     pub fn new(x: f64, y: f64) -> Self {
         Self { x, y }

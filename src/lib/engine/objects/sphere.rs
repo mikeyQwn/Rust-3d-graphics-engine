@@ -16,7 +16,7 @@ impl Sphere {
 
     fn get_fibonacci_sphere_vertices(number_of_points: usize) -> Vec<Vec3d> {
         let mut vertices: Vec<Vec3d> = Vec::with_capacity(number_of_points);
-        let phi = 3.1415 * (3.0 - 5.0_f64.sqrt());
+        let phi = std::f64::consts::PI * (3.0 - 5.0_f64.sqrt());
         for i in 0..number_of_points {
             let y = 1.0 - (i as f64 / (number_of_points as f64 - 1.0)) * 2.0;
             let radius = (1.0 - y * y).sqrt();

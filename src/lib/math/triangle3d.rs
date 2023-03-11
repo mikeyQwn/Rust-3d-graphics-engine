@@ -12,21 +12,11 @@ impl Triangle3d {
         Self { a, b, c }
     }
 
-    pub fn new_from_coordinates(
-        ax: f64,
-        ay: f64,
-        az: f64,
-        bx: f64,
-        by: f64,
-        bz: f64,
-        cx: f64,
-        cy: f64,
-        cz: f64,
-    ) -> Self {
+    pub fn new_from_coordinates(coords: &[f64]) -> Self {
         Self {
-            a: Vec3d::new(ax, ay, az),
-            b: Vec3d::new(bx, by, bz),
-            c: Vec3d::new(cx, cy, cz),
+            a: Vec3d::new(coords[0], coords[1], coords[2]),
+            b: Vec3d::new(coords[3], coords[4], coords[5]),
+            c: Vec3d::new(coords[6], coords[7], coords[8]),
         }
     }
 }

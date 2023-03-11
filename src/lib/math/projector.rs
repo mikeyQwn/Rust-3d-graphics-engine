@@ -33,7 +33,7 @@ impl Projector {
         let left = -right;
         let top = right / aspect_ratio;
         let bottom = -top;
-        return (right, left, top, bottom);
+        (right, left, top, bottom)
     }
 
     fn fill_projection_matrix(
@@ -44,7 +44,7 @@ impl Projector {
         bottom: f64,
         far: f64,
         near: f64,
-    ) -> () {
+    ) {
         projection_matrix.matrix[0][0] = 2.0 * near / (right - left);
         projection_matrix.matrix[1][1] = 2.0 * near / (top - bottom);
         projection_matrix.matrix[2][0] = (right + left) / (right - left);
@@ -55,19 +55,20 @@ impl Projector {
     }
 
     pub fn project(&mut self, point: &Vec3d) -> Vec3d {
-        let mut result = Vec3d::default();
-        result.x = point.x * self.projection_matrix.matrix[0][0]
-            + point.y * self.projection_matrix.matrix[1][0]
-            + point.z * self.projection_matrix.matrix[2][0]
-            + self.projection_matrix.matrix[3][0];
-        result.y = point.x * self.projection_matrix.matrix[0][1]
-            + point.y * self.projection_matrix.matrix[1][1]
-            + point.z * self.projection_matrix.matrix[2][1]
-            + self.projection_matrix.matrix[3][1];
-        result.z = point.x * self.projection_matrix.matrix[0][2]
-            + point.y * self.projection_matrix.matrix[1][2]
-            + point.z * self.projection_matrix.matrix[2][2]
-            + self.projection_matrix.matrix[3][2];
+        let mut result = Vec3d {
+            x: point.x * self.projection_matrix.matrix[0][0]
+                + point.y * self.projection_matrix.matrix[1][0]
+                + point.z * self.projection_matrix.matrix[2][0]
+                + self.projection_matrix.matrix[3][0],
+            y: point.x * self.projection_matrix.matrix[0][1]
+                + point.y * self.projection_matrix.matrix[1][1]
+                + point.z * self.projection_matrix.matrix[2][1]
+                + self.projection_matrix.matrix[3][1],
+            z: point.x * self.projection_matrix.matrix[0][2]
+                + point.y * self.projection_matrix.matrix[1][2]
+                + point.z * self.projection_matrix.matrix[2][2]
+                + self.projection_matrix.matrix[3][2],
+        };
         let w: f64 = result.x * self.projection_matrix.matrix[0][3]
             + result.y * self.projection_matrix.matrix[1][3]
             + result.z * self.projection_matrix.matrix[2][3]

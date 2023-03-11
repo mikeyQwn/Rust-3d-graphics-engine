@@ -8,7 +8,7 @@ pub struct ObjParser {
 }
 
 impl ObjParser {
-    pub fn parse(path: &String) -> Result<Self, &'static str> {
+    pub fn parse(path: &str) -> Result<Self, &'static str> {
         let contents = fs::read_to_string(path);
 
         let res = match contents {
@@ -19,23 +19,23 @@ impl ObjParser {
         let lines = res.split('\n');
         let mut geometric_vertices = Vec::new();
         let mut faces = Vec::new();
-        lines.for_each(|line| match line.chars().nth(0) {
+        lines.for_each(|line| match line.chars().next() {
             Some('v') => {
-                let parsed = Self::parse_numbers(&line.to_string());
+                let parsed = Self::parse_numbers(line);
                 let vec = Vec3d::from_vec_of_points(&parsed);
                 geometric_vertices.push(vec);
             }
             Some('f') => {
-                let parsed = Self::parse_numbers(&line.to_string());
+                let parsed = Self::parse_numbers(line);
                 let vec = Vec3d::from_vec_of_points(&parsed);
                 faces.push(vec)
             }
             _ => {}
         });
-        return Ok(ObjParser {
+        Ok(ObjParser {
             geometric_vertices,
             faces,
-        });
+        })
     }
 
     pub fn geometric_vertices(&self) -> Vec<Vec3d> {
@@ -46,13 +46,12 @@ impl ObjParser {
         self.faces.clone()
     }
 
-    fn parse_numbers(string: &String) -> Vec<f64> {
+    fn parse_numbers(string: &str) -> Vec<f64> {
         let mut numbers: Vec<f64> = Vec::new();
-        let splitted = string.split(" ");
+        let splitted = string.split(' ');
         for item in splitted {
-            match item.parse::<f64>() {
-                Ok(val) => numbers.push(val),
-                _ => {}
+            if let Ok(val) = item.parse::<f64>() {
+                numbers.push(val)
             }
         }
         numbers

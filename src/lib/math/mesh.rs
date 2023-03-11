@@ -5,6 +5,7 @@ pub struct Mesh {
     pub triangles: Vec<Triangle3d>,
 }
 
+#[allow(unused)]
 impl Mesh {
     pub fn new(triangles: Vec<Triangle3d>) -> Self {
         Self { triangles }
@@ -52,23 +53,23 @@ impl Mesh {
     pub fn get_cube_mesh() -> Self {
         Mesh::new(vec![
             //South
-            Triangle3d::new_from_coordinates(0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0),
-            Triangle3d::new_from_coordinates(0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0),
+            Triangle3d::new_from_coordinates(&[0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0]),
+            Triangle3d::new_from_coordinates(&[0.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0, 0.0]),
             //East
-            Triangle3d::new_from_coordinates(1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0),
-            Triangle3d::new_from_coordinates(1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 1.0, 1.0, 1.0]),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0]),
             //North
-            Triangle3d::new_from_coordinates(1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0),
-            Triangle3d::new_from_coordinates(1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 1.0]),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 0.0, 1.0]),
             //West
-            Triangle3d::new_from_coordinates(0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0),
-            Triangle3d::new_from_coordinates(0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0),
+            Triangle3d::new_from_coordinates(&[0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0, 1.0, 0.0]),
+            Triangle3d::new_from_coordinates(&[0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0]),
             //Top
-            Triangle3d::new_from_coordinates(0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0),
-            Triangle3d::new_from_coordinates(0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0),
+            Triangle3d::new_from_coordinates(&[0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0]),
+            Triangle3d::new_from_coordinates(&[0.0, 1.0, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0]),
             //Bottom
-            Triangle3d::new_from_coordinates(1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0),
-            Triangle3d::new_from_coordinates(1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0]),
+            Triangle3d::new_from_coordinates(&[1.0, 0.0, 1.0, 0.0, 0.0, 1.0, 1.0, 0.0, 0.0]),
         ])
     }
 
