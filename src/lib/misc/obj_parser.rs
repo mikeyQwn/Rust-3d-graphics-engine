@@ -42,6 +42,10 @@ impl ObjParser {
         self.geometric_vertices.clone()
     }
 
+    pub fn faces(&self) -> Vec<Vec3d> {
+        self.faces.clone()
+    }
+
     fn parse_numbers(string: &String) -> Vec<f64> {
         let mut numbers: Vec<f64> = Vec::new();
         let splitted = string.split(" ");
